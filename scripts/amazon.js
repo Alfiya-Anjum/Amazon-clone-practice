@@ -1,5 +1,9 @@
-import { cart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
+
+
+
+
 //this is the accumulated HTML for all products, its a pattern 
 let productsHTML = '';
 
@@ -58,41 +62,30 @@ products.forEach((product, index) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
+
+
+function updateCartQuantity() {let cartQuantity = 0;
+        cart.forEach ((cartItem) => {
+          cartQuantity += cartItem.quantity;
+        })
+
+        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+        //this code updates the cart in local storage}
+      }
+
+
 //this code adds functionality to the "Add to Cart" button
 // It listens for clicks on the button and logs the product name to the console
 document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     button.addEventListener('click', () => {
       //dataset property gies us all the data attributes of the button
        const productId = button.dataset.productId;
-
-       let matchingItem;
-
-        cart.forEach((item) => {
-          if (productId === item.productId) {
-            matchingItem = item;
-          }
-            
-        });
-
-        if(matchingItem) {
-          matchingItem.quantity+= 1;
-          
-        }else{
-            cart.push({
-           productId: productId,
-           quantity: 1 //default quantity is 1
-          })
-
-        }
-
+        addToCart(productId);
+    
+      updateCartQuantity();
         //this code updates the cart quantity
         //it sums up the quantity of all items in the cart
-        let cartQuantity = 0;
-        cart.forEach ((item) => {
-          cartQuantity += item.quantity;
-        })
-
-        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-        //this code updates the cart in local storage
+        
     });
 });
