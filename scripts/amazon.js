@@ -1,3 +1,4 @@
+import { cart } from "../data/cart.js";
 
 //this is the accumulated HTML for all products, its a pattern 
 let productsHTML = '';
