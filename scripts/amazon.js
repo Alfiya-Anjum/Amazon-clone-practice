@@ -48,13 +48,41 @@ products.forEach((product, index) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${product.id} ">
             Add to Cart
           </button>
         </div>`;
        
 });
 
-console.log(productsHTML);
-
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+//this code adds functionality to the "Add to Cart" button
+// It listens for clicks on the button and logs the product name to the console
+document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      //dataset property gies us all the data attributes of the button
+       const productId = button.dataset.productId;
+
+       let matchingItem;
+
+        cart.forEach((item) => {
+          if (productId === item.productId) {
+            matchingItem = item;
+          }
+            
+        });
+
+        if(matchingItem) {
+          matchingItem.quantity+= 1;
+          
+        }else{
+            cart.push({
+           productId: productId,
+           quantity: 1 //default quantity is 1
+          })
+
+        }
+          console.log(cart)
+    });
+});
