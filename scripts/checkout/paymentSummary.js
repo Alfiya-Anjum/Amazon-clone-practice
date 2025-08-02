@@ -67,3 +67,5 @@ export function renderPaymentSummary() {
   document.querySelector('.js-payment-summary')
     .innerHTML = paymentSummaryHTML;
 }
+
+//new comments to be added 
