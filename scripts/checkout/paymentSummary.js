@@ -68,4 +68,3 @@ export function renderPaymentSummary() {
     .innerHTML = paymentSummaryHTML;
 }
 
-//new comments to be added 
